@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
+             xmlns:xct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" 
+             xmlns:viewModels="clr-namespace:MauiLoginFlow.ViewModels"
+             
+             x:Class="MauiLoginFlow.MainPage">
+
+
+    <ContentPage.BindingContext>
+        <viewModels:MainPageViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <Grid VerticalOptions="Center"
+              RowSpacing="30"
+              >
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+               
+            </Grid.RowDefinitions>
+
+
+            <Label
+                IsVisible="{Binding IsLogged}"
+                TextColor="Green"
+                Text="Logged"
+                Style="{StaticResource Headline}" />
+
+            <Label
+                IsVisible="{Binding IsLogged, Converter={StaticResource InvertedBoolConverter}}"
+                TextColor="Red"
+                Text="Not Logged"
+                Style="{StaticResource Headline}" />
+
+            <Button Grid.Row="1" Command="{Binding GoToLoginCommand}" HorizontalOptions="Center" Text="ShowLoginPage"></Button>
+        </Grid>
+    </ScrollView>
+
+</ContentPage>
